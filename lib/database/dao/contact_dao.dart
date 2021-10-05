@@ -25,4 +25,24 @@ class ContactDao {
     }
     return lista;
   }
+
+  Future<int> update(Contact contact) async {
+    final Database db = await getDatabase();
+    final Map<String, dynamic> contactMap = contact.toJson();
+    return db.update(
+      _tableName,
+      contactMap,
+      where: '$_idField = ?',
+      whereArgs: [contact.id],
+    );
+  }
+
+  Future<int> delete(int id) async {
+    final Database db = await getDatabase();
+    return db.delete(
+      _tableName,
+      where: '$_idField = ?',
+      whereArgs: [id],
+    );
+  }
 }
