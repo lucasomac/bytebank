@@ -1,7 +1,6 @@
 import 'dart:core';
 
 import 'package:bytebank/screens/dasboard.dart';
-import 'package:bytebank/screens/lista_transferencia.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,7 +35,7 @@ class ByteBankApp extends StatelessWidget {
         //   secondary: Colors.blueAccent[700],
         // ),
       ),
-      home: Dashboard(),
+      home: const Dashboard(),
     );
   }
 }
