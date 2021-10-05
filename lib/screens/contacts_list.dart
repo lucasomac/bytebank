@@ -1,37 +1,63 @@
 import 'package:bytebank/database/app_database.dart';
 import 'package:bytebank/models/contact.dart';
-import 'package:bytebank/screens/contact_form.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatelessWidget {
+import 'contact_form.dart';
+
+class ContactsList extends StatefulWidget {
   const ContactsList({Key? key}) : super(key: key);
 
+  @override
+  State<ContactsList> createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Contacts'),
       ),
-      body: FutureBuilder(
-        future: Future.delayed(const Duration(seconds: 2))
-            .then((value) => findAll()),
-        builder: (context, snapshot) {
-          final List<Contact> contacts = snapshot.data;
-          return ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return _ContactItem(contacts[index]);
-            },
-            itemCount: contacts.length,
-          );
+      body: FutureBuilder<List<Contact>?>(
+        initialData: const [],
+        future: findAll(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Contact>?> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(),
+                      Text('Loading')
+                    ]),
+              );
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              final List<Contact> contacts = snapshot.data!;
+              return ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return _ContactItem(contacts[index]);
+                },
+                itemCount: contacts.length,
+              );
+          }
+          return const Center(
+              child: Text('Sistema Temporariamente Indisponível'));
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ContatForm()))
-              .then((contact) => debugPrint(contact.toString()));
+              .push(MaterialPageRoute(builder: (context) => ContactForm()))
+              .then((value) => setState(() {}));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

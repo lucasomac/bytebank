@@ -9,9 +9,10 @@ Future<Database> createDatabase() {
       path,
       onCreate: (db, version) {
         db.execute(
-            'CREATE TABLE contacts(id INTEGER PRIMARY KEY, nme TEXT, accountNumber INTEGER)');
+            'CREATE TABLE contacts(id INTEGER PRIMARY KEY, name TEXT, accountNumber INTEGER)');
       },
       version: 1,
+      onDowngrade: onDatabaseDowngradeDelete,
     );
   });
 }
@@ -22,10 +23,10 @@ Future<int> save(Contact contact) {
   });
 }
 
-Future<List<Contact>?> findAll() {
+Future<List<Contact>> findAll() {
   return createDatabase().then((db) {
-    db.query('contacts').then((data) {
-      List lista = [];
+    return db.query('contacts').then((data) {
+      List<Contact> lista = [];
       for (var element in data) {
         lista.add(Contact.fromJson(element));
       }
