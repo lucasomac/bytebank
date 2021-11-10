@@ -1,13 +1,25 @@
 import 'contact.dart';
 
 class Transaction {
-  final double value;
-  final Contact contact;
+  late final double value;
+  late final Contact contact;
 
   Transaction(
     this.value,
     this.contact,
   );
+
+  Transaction.fromJson(Map<String, dynamic> json) {
+    value = json['value'];
+    contact = json['contact'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['value'] = value;
+    data['contact'] = contact;
+    return data;
+  }
 
   @override
   String toString() {
