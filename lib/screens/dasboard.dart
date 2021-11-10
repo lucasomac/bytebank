@@ -1,4 +1,6 @@
+import 'package:bytebank/components/feature_item.dart';
 import 'package:bytebank/screens/contacts_list.dart';
+import 'package:bytebank/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
@@ -20,40 +22,44 @@ class Dashboard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset('assets/bytebank_logo.png'),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Material(
-              color: Theme.of(context).primaryColor,
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const ContactsList()));
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  height: 100,
-                  width: 200,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                      Text(
-                        "Contacts",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
-                  ),
+          Container(
+            height: 120,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Row(
+                  children: [
+                    FeatureItem(
+                      "Transfer",
+                      Icons.monetization_on,
+                      onClick: () {
+                        _showContactsList(context);
+                      },
+                    ),
+                    FeatureItem(
+                      "Transaction feed",
+                      Icons.description,
+                      onClick: () => _showTransactionsList(context),
+                    ),
+                  ],
                 ),
-              ),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
+}
+
+void _showTransactionsList(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(
+    builder: (context) => TransactionsList(),
+  ));
+}
+
+void _showContactsList(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(
+    builder: (context) => const ContactsList(),
+  ));
 }
