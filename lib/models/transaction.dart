@@ -11,7 +11,7 @@ class Transaction {
 
   Transaction.fromJson(Map<String, dynamic> json) {
     value = json['value'];
-    contact = json['contact'];
+    contact = Contact.fromJson(json['contact']);
   }
 
   Map<String, dynamic> toJson() {

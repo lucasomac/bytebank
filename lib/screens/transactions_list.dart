@@ -5,7 +5,7 @@ import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsList extends StatelessWidget {
-  TransactionsList({Key? key}) : super(key: key);
+  const TransactionsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +17,6 @@ class TransactionsList extends StatelessWidget {
         future: findAll(),
         builder:
             (BuildContext context, AsyncSnapshot<List<Transaction>> snapshot) {
-          List<Transaction> data = [];
-          if (snapshot.hasData) {
-            data = snapshot.data!;
-          }
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               return const Center(
@@ -31,31 +27,35 @@ class TransactionsList extends StatelessWidget {
               // TODO: Handle this case.
               break;
             case ConnectionState.done:
-              if (data.isNotEmpty) {
-                return ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Transaction transaction = data[index];
-                    return Card(
-                      child: ListTile(
-                        leading: const Icon(Icons.monetization_on),
-                        title: Text(
-                          transaction.value.toString(),
-                          style: const TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
+              print(snapshot.hasData);
+              if (snapshot.hasData) {
+                List<Transaction> data = snapshot.data!;
+                if (data.isNotEmpty) {
+                  return ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Transaction transaction = data[index];
+                      return Card(
+                        child: ListTile(
+                          leading: const Icon(Icons.monetization_on),
+                          title: Text(
+                            transaction.value.toString(),
+                            style: const TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            transaction.contact.accountNumber.toString(),
+                            style: const TextStyle(
+                              fontSize: 16.0,
+                            ),
                           ),
                         ),
-                        subtitle: Text(
-                          transaction.contact.accountNumber.toString(),
-                          style: const TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
+                      );
+                    },
+                  );
+                }
               }
               return CenteredMessage(
                 "No transactions found!",

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http/intercepted_client.dart';
@@ -32,8 +31,9 @@ Future<List<Transaction>> findAll() async {
   Client client = InterceptedClient.build(interceptors: [
     LoggingInterceptor(),
   ]);
-  final Response response = await client.get(
-      Uri(scheme: 'https://flutter-course-api.herokuapp.com/transactions'));
+  final Response response = await client
+      .get(Uri(scheme: 'https://flutter-course-api.herokuapp.com/transactions'))
+      .timeout(const Duration(seconds: 15));
   final List<dynamic> decodeJson = jsonDecode(response.body);
   final List<Transaction> transactions = [];
   for (Map<String, dynamic> element in decodeJson) {
