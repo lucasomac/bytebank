@@ -17,7 +17,7 @@ class Transaction {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['value'] = value;
-    data['contact'] = contact;
+    data['contact'] = contact.toJson();
     return data;
   }
 
