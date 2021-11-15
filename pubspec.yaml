@@ -37,7 +37,9 @@ dependencies:
   http:
   http_interceptor:
   sqflite:
-  path: 
+  path:
+  build_runner: ^2.1.5
+  json_serializable:
 
 dev_dependencies:
   flutter_test:

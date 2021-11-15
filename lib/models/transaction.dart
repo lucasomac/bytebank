@@ -9,17 +9,12 @@ class Transaction {
     this.contact,
   );
 
-  Transaction.fromJson(Map<String, dynamic> json) {
-    value = json['value'];
-    contact = Contact.fromJson(json['contact']);
-  }
+  Transaction.fromJson(Map<String, dynamic> json)
+      : value = json['value'],
+        contact = Contact.fromJson(json['contact']);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['value'] = value;
-    data['contact'] = contact.toJson();
-    return data;
-  }
+  Map<String, dynamic> toJson() =>
+      {'value': value, 'contact': contact.toJson()};
 
   @override
   String toString() {
