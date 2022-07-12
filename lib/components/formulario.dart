@@ -50,8 +50,7 @@ class _FormularioTransferenciaState extends State<FormularioTransferencia> {
   }
 
   void _criaTranferencia(BuildContext context) {
-    final Transferencia transferencia = Transferencia(
-        double.parse(_controllerValor.text),
+    final Transfer transferencia = Transfer(double.parse(_controllerValor.text),
         int.parse(_controllerNumeroConta.text));
     Navigator.pop(context, transferencia);
   }

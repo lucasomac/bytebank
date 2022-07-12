@@ -1,11 +1,11 @@
-class Transferencia {
-  final double valor;
-  final int numeroConta;
+class Transfer {
+  final double value;
+  final int accountNumber;
 
   @override
   String toString() {
-    return 'Transferencia{valor: $valor, numeroConta: $numeroConta}';
+    return 'Transferencia{valor: $value, numeroConta: $accountNumber}';
   }
 
-  Transferencia(this.valor, this.numeroConta);
+  Transfer(this.value, this.accountNumber);
 }

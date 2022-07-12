@@ -2,7 +2,7 @@ import 'package:bytebank/models/transferencia.dart';
 import 'package:flutter/material.dart';
 
 class ItemTranferencia extends StatelessWidget {
-  final Transferencia _tranferencia;
+  final Transfer _tranferencia;
 
   const ItemTranferencia(this._tranferencia);
 
@@ -11,8 +11,8 @@ class ItemTranferencia extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: const Icon(Icons.monetization_on),
-        title: Text(_tranferencia.valor.toString()),
-        subtitle: Text(_tranferencia.numeroConta.toString()),
+        title: Text(_tranferencia.value.toString()),
+        subtitle: Text(_tranferencia.accountNumber.toString()),
         trailing: const Icon(Icons.more_vert),
       ),
     );

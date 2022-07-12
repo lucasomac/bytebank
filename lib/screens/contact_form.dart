@@ -53,7 +53,7 @@ class _ContactFormState extends State<ContactForm> {
                 width: double.maxFinite,
                 child: ElevatedButton(
                   child: const Text("Create"),
-                  onPressed: () => _criaContact(context),
+                  onPressed: () => _createContact(context),
                 ),
               ),
             )
@@ -63,7 +63,7 @@ class _ContactFormState extends State<ContactForm> {
     );
   }
 
-  void _criaContact(BuildContext context) {
+  void _createContact(BuildContext context) {
     final Contact contact = Contact(
         name: _nameController.text,
         accountNumber: int.parse(_numberAccountController.text));

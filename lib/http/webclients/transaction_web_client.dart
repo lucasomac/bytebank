@@ -16,10 +16,18 @@ class TransactionWebClient {
         .toList();
   }
 
-  Future<Transaction> save(Transaction transaction) async {
-    return Transaction.fromJson(jsonDecode((await client.post(apiUrl,
-            headers: {"Content-type": "application/json", "password": "1000"},
-            body: jsonEncode(transaction.toJson())))
-        .body));
+  Future<Transaction> save(Transaction transaction, String password) async {
+    final Response response = await client.post(apiUrl,
+        headers: {"Content-type": "application/json", "password": password},
+        body: jsonEncode(transaction.toJson()));
+    switch (response.statusCode) {
+      case 200:
+        return Transaction.fromJson(jsonDecode(response.body));
+      case 400:
+        throw Exception("There was an error submitting transaction!");
+      case 401:
+        throw Exception("Authentication failed!");
+    }
+    return Transaction.fromJson(jsonDecode(response.body));
   }
 }

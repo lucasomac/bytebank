@@ -62,7 +62,6 @@ class TransactionsList extends StatelessWidget {
                 "No transactions found!",
                 icon: Icons.warning,
               );
-              break;
           }
           return const Center(
               child: Text('Sistema Temporariamente Indisponível'));

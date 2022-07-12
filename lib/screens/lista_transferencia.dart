@@ -1,11 +1,11 @@
-import 'package:bytebank/models/transferencia.dart';
 import 'package:bytebank/components/formulario.dart';
+import 'package:bytebank/models/transferencia.dart';
 import 'package:flutter/material.dart';
 
 import '../components/item_transferencia.dart';
 
 class ListaTransferencia extends StatefulWidget {
-  final List<Transferencia> entries = [];
+  final List<Transfer> entries = [];
 
   ListaTransferencia({Key? key}) : super(key: key);
 
@@ -28,9 +28,9 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final Future<Transferencia?> future = Navigator.push(
+          final Future<Transfer?> future = Navigator.push(
             context,
-            MaterialPageRoute<Transferencia>(
+            MaterialPageRoute<Transfer>(
               builder: (context) {
                 return const FormularioTransferencia();
               },

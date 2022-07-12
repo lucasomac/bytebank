@@ -1,7 +1,7 @@
 import 'contact.dart';
 
 class Transaction {
-  late final double value;
+  late final double? value;
   late final Contact contact;
 
   Transaction(
