@@ -1,9 +1,10 @@
-import 'package:bytebank/components/response_dialog.dart';
-import 'package:bytebank/components/transaction_auth_dialog.dart';
-import 'package:bytebank/http/webclients/transaction_web_client.dart';
-import 'package:bytebank/models/contact.dart';
-import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
+
+import '../components/response_dialog.dart';
+import '../components/transaction_auth_dialog.dart';
+import '../http/webclients/transaction_web_client.dart';
+import '../models/contact.dart';
+import '../models/transaction.dart';
 
 class TransactionForm extends StatefulWidget {
   final Contact contact;
@@ -69,7 +70,7 @@ class _TransactionFormState extends State<TransactionForm> {
                           Transaction(value, widget.contact);
                       showDialog(
                           context: context,
-                          builder: (conttextDialog) {
+                          builder: (contextDialog) {
                             return TransactionAuthDialog(
                               onCancel: () {},
                               onConfirm: (String password) {

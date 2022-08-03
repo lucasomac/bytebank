@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Editor extends StatelessWidget {
-  final String rotulo;
-  final String dica;
+  final String label;
+  final String tip;
   final TextEditingController controller;
   final TextInputType inputType;
   final IconData? iconData;
 
   const Editor({
-    required this.rotulo,
-    required this.dica,
+    required this.label,
+    required this.tip,
     required this.controller,
     required this.inputType,
     this.iconData,
@@ -26,8 +26,8 @@ class Editor extends StatelessWidget {
         keyboardType: inputType,
         decoration: InputDecoration(
             // border: OutlineInputBorder(),
-            labelText: rotulo,
-            hintText: dica,
+            labelText: label,
+            hintText: tip,
             icon: iconData != null ? Icon(iconData) : null),
       ),
     );

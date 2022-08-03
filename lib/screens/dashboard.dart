@@ -1,7 +1,8 @@
-import 'package:bytebank/components/feature_item.dart';
-import 'package:bytebank/screens/contacts_list.dart';
-import 'package:bytebank/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
+
+import '../components/feature_item.dart';
+import 'contacts_list.dart';
+import 'transactions_list.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({

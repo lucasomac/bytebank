@@ -1,10 +1,10 @@
-import 'package:bytebank/components/progress.dart';
-import 'package:bytebank/database/dao/contact_dao.dart';
-import 'package:bytebank/models/contact.dart';
-import 'package:bytebank/screens/transaction_form.dart';
 import 'package:flutter/material.dart';
 
+import '../components/progress.dart';
+import '../database/dao/contact_dao.dart';
+import '../models/contact.dart';
 import 'contact_form.dart';
+import 'transaction_form.dart';
 
 class ContactsList extends StatefulWidget {
   const ContactsList({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _ContactsListState extends State<ContactsList> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return const Progress('Carregando Dados');
+              return const Progress('Loading data...');
             case ConnectionState.active:
               break;
             case ConnectionState.done:
@@ -51,7 +51,7 @@ class _ContactsListState extends State<ContactsList> {
               );
           }
           return const Center(
-              child: Text('Sistema Temporariamente Indisponível'));
+              child: Text('Temporary error. Please, try again later.'));
         },
       ),
       floatingActionButton: FloatingActionButton(

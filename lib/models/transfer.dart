@@ -4,7 +4,7 @@ class Transfer {
 
   @override
   String toString() {
-    return 'Transferencia{valor: $value, numeroConta: $accountNumber}';
+    return 'Transfer{value: $value, accountNumber: $accountNumber}';
   }
 
   Transfer(this.value, this.accountNumber);

@@ -1,19 +1,19 @@
-import 'package:bytebank/components/formulario.dart';
-import 'package:bytebank/models/transferencia.dart';
+import 'package:bytebank/components/form.dart';
+import 'package:bytebank/models/transfer.dart';
 import 'package:flutter/material.dart';
 
-import '../components/item_transferencia.dart';
+import '../components/item_transfer.dart';
 
-class ListaTransferencia extends StatefulWidget {
+class TransferList extends StatefulWidget {
   final List<Transfer> entries = [];
 
-  ListaTransferencia({Key? key}) : super(key: key);
+  TransferList({Key? key}) : super(key: key);
 
   @override
-  State<ListaTransferencia> createState() => _ListaTransferenciaState();
+  State<TransferList> createState() => _TransferListState();
 }
 
-class _ListaTransferenciaState extends State<ListaTransferencia> {
+class _TransferListState extends State<TransferList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           itemCount: widget.entries.length,
           itemBuilder: (BuildContext context, int index) {
-            return ItemTranferencia(widget.entries[index]);
+            return ItemTransfer(widget.entries[index]);
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -32,7 +32,7 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
             context,
             MaterialPageRoute<Transfer>(
               builder: (context) {
-                return const FormularioTransferencia();
+                return const TransferForm();
               },
             ),
           );

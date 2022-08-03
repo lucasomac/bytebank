@@ -1,6 +1,6 @@
-import 'package:bytebank/models/contact.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../models/contact.dart';
 import '../app_database.dart';
 
 class ContactDao {
@@ -19,11 +19,11 @@ class ContactDao {
   Future<List<Contact>> findAll() async {
     final Database db = await getDatabase();
     final List<Map<String, dynamic>> results = await db.query(_tableName);
-    List<Contact> lista = [];
+    List<Contact> list = [];
     for (var element in results) {
-      lista.add(Contact.fromJson(element));
+      list.add(Contact.fromJson(element));
     }
-    return lista;
+    return list;
   }
 
   Future<int> update(Contact contact) async {
