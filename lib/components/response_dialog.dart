@@ -7,13 +7,13 @@ class ResponseDialog extends StatelessWidget {
   final IconData icon;
   final Color colorIcon;
 
-  const ResponseDialog({
-    this.title = "",
-    this.message = "",
-    required this.icon,
-    this.buttonText = 'Ok',
-    this.colorIcon = Colors.black,
-  });
+  const ResponseDialog(
+      {this.title = "",
+      this.message = "",
+      required this.icon,
+      this.buttonText = 'Ok',
+      this.colorIcon = Colors.black,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ResponseDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Visibility(
-            visible: icon != null,
+            visible: true,
             child: Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: Icon(
@@ -68,11 +68,8 @@ class SuccessDialog extends StatelessWidget {
   final String message;
   final IconData icon;
 
-  const SuccessDialog(
-    this.message, {
-    this.title = 'Success',
-    this.icon = Icons.done,
-  });
+  const SuccessDialog(this.message,
+      {this.title = 'Success', this.icon = Icons.done, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +87,8 @@ class FailureDialog extends StatelessWidget {
   final String message;
   final IconData icon;
 
-  const FailureDialog(
-    this.message, {
-    this.title = 'Failure',
-    this.icon = Icons.warning,
-  });
+  const FailureDialog(this.message,
+      {this.title = 'Failure', this.icon = Icons.warning, super.key});
 
   @override
   Widget build(BuildContext context) {

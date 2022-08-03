@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ItemTranferencia extends StatelessWidget {
   final Transfer _tranferencia;
 
-  const ItemTranferencia(this._tranferencia);
+  const ItemTranferencia(this._tranferencia, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
