@@ -1,3 +1,5 @@
+import 'package:bytebank/utils/functions.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 
 import '../components/response_dialog.dart';
@@ -53,6 +55,13 @@ class _TransactionFormState extends State<TransactionForm> {
                   controller: _valueController,
                   style: const TextStyle(fontSize: 24.0),
                   decoration: const InputDecoration(labelText: 'Value'),
+                  inputFormatters: [
+                    CurrencyTextInputFormatter(
+                      locale: 'pt-BR',
+                      decimalDigits: 2,
+                      symbol: 'R\$ ',
+                    )
+                  ],
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                 ),
@@ -64,8 +73,8 @@ class _TransactionFormState extends State<TransactionForm> {
                   child: ElevatedButton(
                     child: const Text('Transfer'),
                     onPressed: () {
-                      final double? value =
-                          double.tryParse(_valueController.text);
+                      final double? value = double.tryParse(
+                          Functions.unMask(_valueController.text));
                       final transactionCreated =
                           Transaction(value, widget.contact);
                       showDialog(

@@ -18,7 +18,7 @@ class FeatureItem extends StatelessWidget {
           onTap: () => onClick(),
           child: Container(
             padding: const EdgeInsets.all(8.0),
-            width: 200,
+            width: 180,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -40,6 +40,7 @@ dependencies:
   path:
   build_runner: ^2.1.5
   json_serializable:
+  currency_text_input_formatter: ^2.1.7
 
 dev_dependencies:
   flutter_test:

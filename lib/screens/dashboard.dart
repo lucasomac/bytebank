@@ -17,11 +17,13 @@ class Dashboard extends StatelessWidget {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/bytebank_logo.png'),
+            child: Image.asset(
+              'assets/bank.png',
+            ),
           ),
           SizedBox(
             height: 120,
