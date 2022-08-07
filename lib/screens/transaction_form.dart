@@ -1,6 +1,7 @@
 import 'package:bytebank/utils/functions.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../components/response_dialog.dart';
 import '../components/transaction_auth_dialog.dart';
@@ -20,6 +21,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
   final TransactionWebClient _transactionWebClient = TransactionWebClient();
+  final transactionId = const Uuid().v4();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class _TransactionFormState extends State<TransactionForm> {
                       final double? value = double.tryParse(
                           Functions.unMask(_valueController.text));
                       final transactionCreated =
-                          Transaction(value, widget.contact);
+                          Transaction(transactionId, value, widget.contact);
                       showDialog(
                           context: context,
                           builder: (contextDialog) {
@@ -100,7 +102,6 @@ class _TransactionFormState extends State<TransactionForm> {
 
   void _save(Transaction transactionCreated, String password,
       BuildContext context) async {
-    // final Transaction transaction =
     await _transactionWebClient.save(transactionCreated, password).catchError(
         (error) {
       showDialog(

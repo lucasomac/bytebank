@@ -41,6 +41,7 @@ dependencies:
   build_runner: ^2.1.5
   json_serializable:
   currency_text_input_formatter: ^2.1.7
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:
