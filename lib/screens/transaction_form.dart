@@ -1,5 +1,7 @@
+import 'package:bytebank/components/progress.dart';
 import 'package:bytebank/utils/functions.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -22,6 +24,7 @@ class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
   final TransactionWebClient _transactionWebClient = TransactionWebClient();
   final transactionId = const Uuid().v4();
+  bool _sending = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,13 @@ class _TransactionFormState extends State<TransactionForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Visibility(
+                visible: _sending,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Progress('Efetivando transação, aguarde...'),
+                ),
+              ),
               Text(
                 widget.contact.name,
                 style: const TextStyle(
@@ -102,14 +112,29 @@ class _TransactionFormState extends State<TransactionForm> {
 
   void _save(Transaction transactionCreated, String password,
       BuildContext context) async {
+    setState(() {
+      _sending = true;
+    });
     await _transactionWebClient.save(transactionCreated, password).catchError(
         (error) {
+      FirebaseCrashlytics.instance.recordError(error, null);
+      FirebaseCrashlytics.instance.setCustomKey("exception", error.toString());
+      FirebaseCrashlytics.instance.setCustomKey("http_code", error.code);
+      FirebaseCrashlytics.instance
+          .setCustomKey("htt_body", transactionCreated.toString());
       showDialog(
           context: context,
           builder: (contextDialog) {
             return FailureDialog(error.message);
           });
-    }, test: (e) => e is Exception);
+    }, test: (e) => e is Exception).whenComplete(() {
+      setState(() {
+        _sending = false;
+      });
+    });
+    setState(() {
+      _sending = false;
+    });
     await showDialog(
         context: context,
         builder: (contextDialog) {

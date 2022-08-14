@@ -18,7 +18,13 @@ class Progress extends StatelessWidget {
             CircularProgressIndicator(
               color: Theme.of(context).primaryColor,
             ),
-            Text(message)
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                message,
+                style: TextStyle(fontSize: 16),
+              ),
+            )
           ]),
     );
   }
