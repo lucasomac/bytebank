@@ -70,3 +70,6 @@ lib/generated_plugin_registrant.dart
 /.idea/
 /android/.idea/
 /lib/firebase_options.dart
+/ios/firebase_app_id_file.json
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
